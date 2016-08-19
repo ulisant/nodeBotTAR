@@ -458,7 +458,7 @@ function getTitlePost(sender) {
 					"image_url": "http://previews.123rf.com/images/yienkeat/yienkeat1408/yienkeat140800009/30818779-Vector-2D-Flat-Alphabet-Design-Stock-Vector.jpg",
 					"buttons": [{
 						"type": "postback",
-						"title": "Postback",
+						"title": "Enviar",
 						"payload": "Titulo",
 					}],
 				}]
@@ -494,7 +494,7 @@ function getStreetPost(sender) {
           "image_url": "https://thumbs.dreamstime.com/z/modern-city-street-concept-flat-design-style-48941021.jpg",
           "buttons": [{
             "type": "postback",
-            "title": "Postback",
+            "title": "Enviar",
             "payload": "Calle",
           }],
         }]
@@ -530,7 +530,7 @@ function getTownPost(sender) {
           "image_url": "https://thumbs.dreamstime.com/z/modern-city-street-concept-flat-design-style-48941021.jpg",
           "buttons": [{
             "type": "postback",
-            "title": "Postback",
+            "title": "Enviar",
             "payload": "Colonia",
           }],
         }]
@@ -566,7 +566,7 @@ function getExtraPost(sender) {
           "image_url": "https://thumbs.dreamstime.com/z/modern-city-street-concept-flat-design-style-48941021.jpg",
           "buttons": [{
             "type": "postback",
-            "title": "Postback",
+            "title": "Enviar",
             "payload": "Extra",
           }],
         }]
@@ -602,7 +602,7 @@ function getDescriptionPost(sender) {
           "image_url": "http://flatdesign.im/gallerys/office/8/pencil-preview.png",
           "buttons": [{
             "type": "postback",
-            "title": "Postback",
+            "title": "Enviar",
             "payload": "Descripcion",
           }],
         }]
