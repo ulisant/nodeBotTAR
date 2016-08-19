@@ -70,11 +70,21 @@ app.post('/tarant/', function (req, res) {
       if (text === "Reportar") {
         if (data_send.category == null) {
           selectCategory(sender)
-          getTitlePost(sender, text.substring(0,200))
-          getStreetPost(sender, text.substring(0,200))
-          getTownPost(sender, text.substring(0,200))
-          getExtraPost(sender, text.substring(0,200))
-          getDescriptionPost(sender, text.substring(0,200))
+          if (data_send.category != null) {
+            getTitlePost(sender, text.substring(0,200))
+          }
+          if (data_send.title != "") {
+            getStreetPost(sender, text.substring(0,200))
+          }
+          if (data_send.street != "") {
+            getTownPost(sender, text.substring(0,200))
+          }
+          if (data_send.town != "") {
+            getExtraPost(sender, text.substring(0,200))
+          }
+          if (data_send.extra_location != "") {
+            getDescriptionPost(sender, text.substring(0,200))
+          }
         }
 
 
