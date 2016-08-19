@@ -134,9 +134,9 @@ function locationMP(sender){
                 "template_type": "generic",
                 "elements": {
                     "element": {
-                        "title": "Your current location",
-                        "image_url": "https:\/\/maps.googleapis.com\/maps\/api\/staticmap?size=764x400&center="+"20.1029126"+","+"-98.3558106"+"&zoom=25&markers="+"20.1029126"+","+"-98.3558106",
-                        "item_url": "http:\/\/maps.apple.com\/maps?q="+"20.1029126"+","+"-98.3558106"+"&z=16"
+                        "title": "Ubicación del MP mas cercano",
+                        "image_url": "https:\/\/wwww.bing.com\/mapspreview?v=2&pc=FACEBK&mid=8100&where1=20.1029126%2C+-98.3558106&FORM=FBKPL1&mkt=en-US",
+                        "item_url": "https:\/\/maps.googleapis.com\/maps\/api\/staticmap?size=764x400&center="+"20.1029126"+","+"-98.3558106"+"&zoom=25&markers="+"20.1029126"+","+"-98.3558106"
                     }
                 }
             }
