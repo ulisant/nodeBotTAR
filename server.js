@@ -95,28 +95,28 @@ app.post('/tarant/', function (req, res) {
 		}
 		if (event.postback) {
 			let text2 = JSON.stringify(event.postback)
-      console.log(event.postback.payload + "aqui");
+      var text3 = String(event.postback.payload)
       sendTextMessage(sender, "Postback received: "+text2.substring(0, 200), token)
-      if (text2 == "Experiencias") {
+      if (text3 == "Experiencias") {
         data_send.category = 1
         console.log("ex");
         getTitlePost(sender)
-      }else if (text2 == "Robos") {
+      }else if (text3 == "Robos") {
         console.log("ro");
         data_send.category = 2
         getTitlePost(sender)
-      }else if (text2 == "Alerta") {
+      }else if (text3 == "Alerta") {
         console.log("lae");
         data_send.category = 3
         getTitlePost(sender)
-      }else if (text2 == "Titulo") {
+      }else if (text3 == "Titulo") {
         console.log("title");
         getStreetPost(sender)
-      }else if (text2 == "Calle"){
+      }else if (text3 == "Calle"){
         getTownPost(sender)
-      }else if (text2 == "Colonia"){
+      }else if (text3 == "Colonia"){
         getExtraPost(sender)
-      }else if (text2 == "Extra"){
+      }else if (text3 == "Extra"){
         getDescriptionPost(sender)
       }
 			continue
