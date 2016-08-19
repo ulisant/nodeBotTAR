@@ -344,7 +344,7 @@ function selectCategory(sender) {
         "content_type":"text",
         "title":"Robo",
         "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ROBO"
-      }
+      },
       {
         "content_type":"text",
         "title":"Alerta",
