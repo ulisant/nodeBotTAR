@@ -63,6 +63,14 @@ app.post('/tarant/', function (req, res) {
         }
         if (res_sp[0] == 'Descripción') {
           data_send.description = res_sp[1]
+          request({
+            uri: "http://40.118.210.129:8080/restrobos/posts/",
+            method: "POST",
+            form: data_send
+          }, function(error, response, body) {
+            console.log(body);
+          });
+          sendTextFinal(sender)
         }
       }else{
         if (text === 'Generic') {
@@ -90,13 +98,10 @@ app.post('/tarant/', function (req, res) {
           continue
         }
       }
-
-			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
 		}
 		if (event.postback) {
 			let text2 = JSON.stringify(event.postback)
       var text3 = String(event.postback.payload)
-      sendTextMessage(sender, "Postback received: "+text2.substring(0, 200), token)
       if (text3 == "Experiencias") {
         data_send.category = 1
         console.log("ex");
@@ -132,6 +137,26 @@ const token = "EAAEjs8BATfMBALuTVc7oJWhInDmvecV02p0TFaOK03GvyBaJ0tJScDFjWJ33o9Er
 
 function sendTextMessage(sender, text) {
 	let messageData = { text:text }
+
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/messages',
+		qs: {access_token:token},
+		method: 'POST',
+		json: {
+			recipient: {id:sender},
+			message: messageData,
+		}
+	}, function(error, response, body) {
+		if (error) {
+			console.log('Error sending messages: ', error)
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error)
+		}
+	})
+}
+
+function sendTextFinal(sender) {
+	let messageData = { text:"Tu registro fue enviado exitosamente" }
 
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
@@ -418,14 +443,6 @@ function selectCategory(sender) {
 	})
 
 
-  //request({
-  //  uri: "http://40.118.210.129:8080/restrobos/posts/",
-  //  method: "POST",
-  //  form: data_send
-  //}, function(error, response, body) {
-    //console.log(body);
-  //});
-
 
 }
 
@@ -438,7 +455,7 @@ function getTitlePost(sender) {
 				"elements": [{
 					"title": "Ingresa el Titulo Con El Siguiente Formato",
 					"subtitle": "Titulo:TuTitulo",
-					"image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+					"image_url": "http://previews.123rf.com/images/yienkeat/yienkeat1408/yienkeat140800009/30818779-Vector-2D-Flat-Alphabet-Design-Stock-Vector.jpg",
 					"buttons": [{
 						"type": "postback",
 						"title": "Postback",
@@ -474,7 +491,7 @@ function getStreetPost(sender) {
         "elements": [{
           "title": "Ingresa la Calle Con El Siguiente Formato",
           "subtitle": "Calle:TuCalle",
-          "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+          "image_url": "https://thumbs.dreamstime.com/z/modern-city-street-concept-flat-design-style-48941021.jpg",
           "buttons": [{
             "type": "postback",
             "title": "Postback",
@@ -510,7 +527,7 @@ function getTownPost(sender) {
         "elements": [{
           "title": "Ingresa la Colonia Con El Siguiente Formato",
           "subtitle": "Colonia:TuColonia",
-          "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+          "image_url": "https://thumbs.dreamstime.com/z/modern-city-street-concept-flat-design-style-48941021.jpg",
           "buttons": [{
             "type": "postback",
             "title": "Postback",
@@ -546,7 +563,7 @@ function getExtraPost(sender) {
         "elements": [{
           "title": "Ingresa los Datos Extra de La Ubicación Con El Siguiente Formato",
           "subtitle": "Extra:DetallesExtra",
-          "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+          "image_url": "https://thumbs.dreamstime.com/z/modern-city-street-concept-flat-design-style-48941021.jpg",
           "buttons": [{
             "type": "postback",
             "title": "Postback",
@@ -582,7 +599,7 @@ function getDescriptionPost(sender) {
         "elements": [{
           "title": "Ingresa la Descripción Con El Siguiente Formato",
           "subtitle": "Descripción:TuDescripción",
-          "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+          "image_url": "http://flatdesign.im/gallerys/office/8/pencil-preview.png",
           "buttons": [{
             "type": "postback",
             "title": "Postback",
