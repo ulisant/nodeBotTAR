@@ -378,17 +378,17 @@ function selectCategory(sender) {
     "text":"Selecciona una categoria:",
     "quick_replies":[
       {
-        "content_type":"postback",
+        "content_type":"text",
         "title":"Experiencias",
         "payload":"Categoria"
       },
       {
-        "content_type":"postback",
+        "content_type":"text",
         "title":"Robo",
         "payload":"Categoria"
       },
       {
-        "content_type":"postback",
+        "content_type":"text",
         "title":"Alerta",
         "payload":"Categoria"
       }
