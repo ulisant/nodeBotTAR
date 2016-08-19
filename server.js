@@ -37,6 +37,10 @@ app.post('/tarant/', function (req, res) {
 				sendGenericMessage(sender)
 				continue
 			}
+      if (text === "Ubicación") {
+        locationMP(sender)
+        continue
+      }
 			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
 		}
 		if (event.postback) {
@@ -120,6 +124,41 @@ function sendGenericMessage(sender) {
 			console.log('Error: ', response.body.error)
 		}
 	})
+}
+
+function locationMP(sender){
+  let messageData = {
+    "message": {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": {
+                    "element": {
+                        "title": "Your current location",
+                        "image_url": "https:\/\/maps.googleapis.com\/maps\/api\/staticmap?size=764x400&center="+lat+","+long+"&zoom=25&markers="+lat+","+long,
+                        "item_url": "http:\/\/maps.apple.com\/maps?q="+"20.1029126"+","+"-98.3558106"+"&z=16"
+                    }
+                }
+            }
+        }
+    }
+  }
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {access_token:token},
+    method: 'POST',
+    json: {
+      recipient: {id:sender},
+      message: messageData,
+    }
+  }, function(error, response, body) {
+    if (error) {
+      console.log('Error sending messages: ', error)
+    } else if (response.body.error) {
+      console.log('Error: ', response.body.error)
+    }
+  })
 }
 
 // Spin up the server
