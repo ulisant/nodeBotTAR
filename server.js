@@ -95,7 +95,7 @@ app.post('/tarant/', function (req, res) {
 		}
 		if (event.postback) {
 			let text2 = JSON.stringify(event.postback)
-      console.log(event.postback);
+      console.log(event.postback.payload + "aqui");
       sendTextMessage(sender, "Postback received: "+text2.substring(0, 200), token)
       if (text2 == "Experiencias") {
         data_send.category = 1
