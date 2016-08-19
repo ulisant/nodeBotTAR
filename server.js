@@ -210,8 +210,8 @@ function dataPosts(sender) {
     for (var i = 0; i < 5; i++) {
       var elements = {
         "title": results[i].title,
-        "subtitle": "Calle: " + results[i].street + "Colonia: " + results[i].town,
-        "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+        "subtitle": "Calle: " + results[i].street + " Colonia: " + results[i].town,
+        "image_url": "http://flatdesign.im/gallerys/web/20/yellow-warning-sign-preview.png",
       }
       data_post.push(elements)
     }
