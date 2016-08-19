@@ -491,7 +491,7 @@ function getTownPost(sender, text) {
         }]
       }
     }
-  }  data_send.town = text
+  }
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
 		qs: {access_token:token},
@@ -531,7 +531,7 @@ function getExtraPost(sender, text) {
         }]
       }
     }
-  }  data_send.extra_location = text
+  }
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
 		qs: {access_token:token},
@@ -571,7 +571,7 @@ function getDescriptionPost(sender, text) {
         }]
       }
     }
-  }  data_send.description = text
+  }
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
 		qs: {access_token:token},
