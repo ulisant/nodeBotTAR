@@ -295,7 +295,7 @@ function dataPosts(sender) {
   request("http://40.118.210.129:8080/restrobos/posts/", function(error, response, body) {
     var data = JSON.parse(body)
     var results = data.results
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 3; i++) {
       var elements = {
         "title": results[i].title,
         "subtitle": "Calle: " + results[i].street + " Colonia: " + results[i].town,
