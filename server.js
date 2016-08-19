@@ -13,7 +13,6 @@ app.use(bodyParser.urlencoded({extended: false}))
 // Process application/json
 app.use(bodyParser.json())
 
-var data_post = []
 
 
 var data_send = {
@@ -292,6 +291,7 @@ function dataMessage(sender) {
 }
 
 function dataPosts(sender) {
+  var data_post = []
   request("http://40.118.210.129:8080/restrobos/posts/", function(error, response, body) {
     var data = JSON.parse(body)
     var results = data.results
