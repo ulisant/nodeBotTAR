@@ -95,7 +95,7 @@ app.post('/tarant/', function (req, res) {
 		}
 		if (event.postback) {
 			let text2 = JSON.stringify(event.postback)
-      var text3 = text2.substring(0,200)
+      var text3 = text2.payload
       console.log(text2);
       console.log(text3);
       sendTextMessage(sender, "Postback received: "+text2.substring(0, 200), token)
