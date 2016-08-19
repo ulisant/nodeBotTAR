@@ -68,8 +68,21 @@ app.post('/tarant/', function (req, res) {
         continue
       }
       if (text === "Reportar") {
-        selectCategory(sender)
+        if (data_send.category == null) {
+          selectCategory(sender)
+        }
+        if (data_send.title == "") {
+          getTitlePost(sender, text.substring(0,200))
+        }
         continue
+      }
+      if (text === "Experiencias") {
+        data_send.category = 1
+      }
+      if (text === "Robo") {
+        data_send.category = 2
+      }if (text === "Alerta") {
+        data_send.category = 3
       }
 			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
 		}
@@ -378,6 +391,26 @@ function selectCategory(sender) {
   //});
 
 
+}
+
+function getTitlePost(sender, text) {
+	let messageData = { text:"Me puedes proporcionar el titulo del tu post" }
+  data_send.title = text
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/messages',
+		qs: {access_token:token},
+		method: 'POST',
+		json: {
+			recipient: {id:sender},
+			message: messageData,
+		}
+	}, function(error, response, body) {
+		if (error) {
+			console.log('Error sending messages: ', error)
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error)
+		}
+	})
 }
 
 // Spin up the server
