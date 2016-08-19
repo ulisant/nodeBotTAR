@@ -48,38 +48,46 @@ app.post('/tarant/', function (req, res) {
 		if (event.message && event.message.text) {
 			let text = event.message.text
       var res_sp = text.split(":");
-			if (res === 'Generic') {
-				sendGenericMessage(sender)
-				continue
-			}
-      if (res_sp === "Ubicación") {
-        locationMP(sender)
-        continue
+      if (res_sp.length == 2){
+        console.log("este tiene 2");
+      }else{
+        if (text === 'Generic') {
+          sendGenericMessage(sender)
+          continue
+        }
+        if (text === "Ubicación") {
+          locationMP(sender)
+          continue
+        }
+        if (text === "Contacto") {
+          dataMessage(sender)
+          continue
+        }
+        if (text === "Recientes") {
+          dataPosts(sender)
+          continue
+        }
+        if (text === "Prevención") {
+          sendImages(sender)
+          continue
+        }
+        if (text === "Reportar") {
+          selectCategory(sender)
+          continue
+        }
+        if (text === "Experiencias") {
+          data_send.category = 1
+          continue
+        }
+        if (text === "Robo") {
+          data_send.category = 2
+          continue
+        }if (text === "Alerta") {
+          data_send.category = 3
+          continue
+        }
       }
-      if (res_sp === "Contacto") {
-        dataMessage(sender)
-        continue
-      }
-      if (res_sp === "Recientes") {
-        dataPosts(sender)
-        continue
-      }
-      if (res_sp === "Prevención") {
-        sendImages(sender)
-        continue
-      }
-      if (res_sp === "Reportar") {
-        selectCategory(sender)
-        continue
-      }
-      if (res_sp === "Experiencias") {
-        data_send.category = 1
-      }
-      if (res_sp === "Robo") {
-        data_send.category = 2
-      }if (res_sp === "Alerta") {
-        data_send.category = 3
-      }
+
 			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
 		}
 		if (event.postback) {
