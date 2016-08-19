@@ -172,8 +172,8 @@ function dataMessage(sender) {
 				"elements": [{
 					"title": "Teléfonos de Contacto",
 					"subtitle": "(775) 75 3 01 57 EXT. 4133 y 4633" +
-          "(775) 75 5 26 86 " +  
-          "01 (800) 69 0 74 48",
+          "\t (775) 75 5 26 86 " +
+          "\t 01 (800) 69 0 74 48",
 					"image_url": "http://premiumwebfreebies.com/wp-content/uploads/2013/11/flat-email-icon-display.jpg",
 
 				}]
