@@ -48,8 +48,10 @@ app.post('/tarant/', function (req, res) {
 		if (event.message && event.message.text) {
 			let text = event.message.text
       var res_sp = text.split(":");
-      if (res_sp.length == 2){
-        console.log("este tiene 2");
+      if (res_sp.length > 1){
+        if (res_sp[0] == 'Titulo') {
+          getTitlePost(sender)
+        }
       }else{
         if (text === 'Generic') {
           sendGenericMessage(sender)
@@ -397,7 +399,7 @@ function selectCategory(sender) {
 
 }
 
-function getTitlePost(sender, text) {
+function getTitlePost(sender) {
 	let messageData = {
     "attachment": {
 			"type": "template",
@@ -437,7 +439,7 @@ function getTitlePost(sender, text) {
 	})
 }
 
-function getStreetPost(sender, text) {
+function getStreetPost(sender) {
 	let messageData = {
     "attachment": {
       "type": "template",
@@ -477,7 +479,7 @@ function getStreetPost(sender, text) {
 	})
 }
 
-function getTownPost(sender, text) {
+function getTownPost(sender) {
   let messageData = {
     "attachment": {
       "type": "template",
@@ -517,7 +519,7 @@ function getTownPost(sender, text) {
 	})
 }
 
-function getExtraPost(sender, text) {
+function getExtraPost(sender) {
   let messageData = {
     "attachment": {
       "type": "template",
@@ -557,7 +559,7 @@ function getExtraPost(sender, text) {
 	})
 }
 
-function getDescriptionPost(sender, text) {
+function getDescriptionPost(sender) {
   let messageData = {
     "attachment": {
       "type": "template",
