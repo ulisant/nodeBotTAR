@@ -15,6 +15,18 @@ app.use(bodyParser.json())
 
 var data_post = []
 
+
+var data_send = {
+    "title": "",
+    "category": null,
+    "street": "",
+    "town": "",
+    "extra_location": "",
+    "user": 25,
+    "description": ""
+}
+
+
 // Index route
 app.get('/', function (req, res) {
     res.send('Hello world, I am a chat bot')
@@ -53,6 +65,10 @@ app.post('/tarant/', function (req, res) {
       }
       if (text === "Prevención") {
         sendImages(sender)
+        continue
+      }
+      if (text === "Reportar") {
+        selectCategory(sender)
         continue
       }
 			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
@@ -312,6 +328,56 @@ function sendImages(sender) {
 			console.log('Error: ', response.body.error)
 		}
 	})
+}
+
+function selectCategory(sender) {
+
+  let messageData = {
+    "text":"Selecciona una categoria:",
+    "quick_replies":[
+      {
+        "content_type":"text",
+        "title":"Experiencias",
+        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_EXPERIENCIAS"
+      },
+      {
+        "content_type":"text",
+        "title":"Robo",
+        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ROBO"
+      }
+      {
+        "content_type":"text",
+        "title":"Alerta",
+        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ALERTA"
+      }
+    ]
+	}
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/messages',
+		qs: {access_token:token},
+		method: 'POST',
+		json: {
+			recipient: {id:sender},
+			message: messageData,
+		}
+	}, function(error, response, body) {
+		if (error) {
+			console.log('Error sending messages: ', error)
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error)
+		}
+	})
+
+
+  //request({
+  //  uri: "http://40.118.210.129:8080/restrobos/posts/",
+  //  method: "POST",
+  //  form: data_send
+  //}, function(error, response, body) {
+    //console.log(body);
+  //});
+
+
 }
 
 // Spin up the server
