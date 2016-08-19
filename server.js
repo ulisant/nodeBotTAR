@@ -292,7 +292,7 @@ function sendImages(sender) {
 				}, {
 					"title": "Marca 10",
 					"subtitle": "ESTAN FUERA PERO HAY DIFICULTADES",
-					"image_url": "images/_estan_fuera_pero_hay_dificultades.png",
+					"image_url": "images/estan_fuera_pero_hay_dificultades.png",
 				}]
 			}
 		}
