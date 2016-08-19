@@ -50,7 +50,19 @@ app.post('/tarant/', function (req, res) {
       var res_sp = text.split(":");
       if (res_sp.length > 1){
         if (res_sp[0] == 'Titulo') {
-          getTitlePost(sender)
+          data_send.title = res_sp[1]
+        }
+        if (res_sp[0] == 'Calle') {
+          data_send.street = res_sp[1]
+        }
+        if (res_sp[0] == 'Colonia') {
+          data_send.town = res_sp[1]
+        }
+        if (res_sp[0] == 'Extra') {
+          data_send.extra_location = res_sp[1]
+        }
+        if (res_sp[0] == 'Descripción') {
+          data_send.description = res_sp[1]
         }
       }else{
         if (text === 'Generic') {
@@ -94,7 +106,18 @@ app.post('/tarant/', function (req, res) {
 		}
 		if (event.postback) {
 			let text = JSON.stringify(event.postback)
-			sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
+      if (text == "Categoria") {
+        getTitlePost(sender)
+      }
+      if (text == "Titulo") {
+        getStreetPost(sender)
+      }else if (text == "Calle"){
+        getTownPost(sender)
+      }else if (text == "Colonia"){
+        getExtraPost(sender)
+      }else if (text == "Extra"){
+        getDescriptionPost(sender)
+      }
 			continue
 		}
 	}
@@ -355,19 +378,19 @@ function selectCategory(sender) {
     "text":"Selecciona una categoria:",
     "quick_replies":[
       {
-        "content_type":"text",
+        "type":"postback",
         "title":"Experiencias",
-        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_EXPERIENCIAS"
+        "payload":"Categoria"
       },
       {
-        "content_type":"text",
+        "type":"postback",
         "title":"Robo",
-        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ROBO"
+        "payload":"Categoria"
       },
       {
-        "content_type":"text",
+        "type":"postback",
         "title":"Alerta",
-        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ALERTA"
+        "payload":"Categoria"
       }
     ]
 	}
@@ -410,10 +433,6 @@ function getTitlePost(sender) {
 					"subtitle": "Titulo:TuTitulo",
 					"image_url": "http://messengerdemo.parseapp.com/img/rift.png",
 					"buttons": [{
-						"type": "web_url",
-						"url": "https://www.messenger.com",
-						"title": "web url"
-					}, {
 						"type": "postback",
 						"title": "Postback",
 						"payload": "Titulo",
@@ -450,10 +469,6 @@ function getStreetPost(sender) {
           "subtitle": "Calle:TuCalle",
           "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
           "buttons": [{
-            "type": "web_url",
-            "url": "https://www.messenger.com",
-            "title": "web url"
-          }, {
             "type": "postback",
             "title": "Postback",
             "payload": "Calle",
@@ -490,10 +505,6 @@ function getTownPost(sender) {
           "subtitle": "Colonia:TuColonia",
           "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
           "buttons": [{
-            "type": "web_url",
-            "url": "https://www.messenger.com",
-            "title": "web url"
-          }, {
             "type": "postback",
             "title": "Postback",
             "payload": "Colonia",
@@ -530,10 +541,6 @@ function getExtraPost(sender) {
           "subtitle": "Extra:DetallesExtra",
           "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
           "buttons": [{
-            "type": "web_url",
-            "url": "https://www.messenger.com",
-            "title": "web url"
-          }, {
             "type": "postback",
             "title": "Postback",
             "payload": "Extra",
@@ -570,10 +577,6 @@ function getDescriptionPost(sender) {
           "subtitle": "Descripción:TuDescripción",
           "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
           "buttons": [{
-            "type": "web_url",
-            "url": "https://www.messenger.com",
-            "title": "web url"
-          }, {
             "type": "postback",
             "title": "Postback",
             "payload": "Descripcion",
