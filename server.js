@@ -70,6 +70,8 @@ app.post('/tarant/', function (req, res) {
       if (text === "Reportar") {
         if (data_send.category == null) {
           selectCategory(sender)
+
+        }else {
           if (data_send.category != null) {
             getTitlePost(sender, text.substring(0,200))
             if (data_send.title != "") {
