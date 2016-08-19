@@ -47,37 +47,37 @@ app.post('/tarant/', function (req, res) {
 		let sender = event.sender.id
 		if (event.message && event.message.text) {
 			let text = event.message.text
-      var res = text.split(":");
+      var res_sp = text.split(":");
 			if (res === 'Generic') {
 				sendGenericMessage(sender)
 				continue
 			}
-      if (res === "Ubicación") {
+      if (res_sp === "Ubicación") {
         locationMP(sender)
         continue
       }
-      if (res === "Contacto") {
+      if (res_sp === "Contacto") {
         dataMessage(sender)
         continue
       }
-      if (res === "Recientes") {
+      if (res_sp === "Recientes") {
         dataPosts(sender)
         continue
       }
-      if (res === "Prevención") {
+      if (res_sp === "Prevención") {
         sendImages(sender)
         continue
       }
-      if (res === "Reportar") {
+      if (res_sp === "Reportar") {
         selectCategory(sender)
         continue
       }
-      if (res === "Experiencias") {
+      if (res_sp === "Experiencias") {
         data_send.category = 1
       }
-      if (res === "Robo") {
+      if (res_sp === "Robo") {
         data_send.category = 2
-      }if (res === "Alerta") {
+      }if (res_sp === "Alerta") {
         data_send.category = 3
       }
 			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
