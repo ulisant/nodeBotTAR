@@ -387,7 +387,7 @@ function selectCategory(sender) {
             "type":"postback",
             "title":"Robos",
             "payload":"Robos"
-          }
+          },
           {
             "type":"postback",
             "title":"Alerta",
