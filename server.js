@@ -47,57 +47,37 @@ app.post('/tarant/', function (req, res) {
 		let sender = event.sender.id
 		if (event.message && event.message.text) {
 			let text = event.message.text
-			if (text === 'Generic') {
+      var res = text.split(":");
+			if (res === 'Generic') {
 				sendGenericMessage(sender)
 				continue
 			}
-      if (text === "Ubicación") {
+      if (res === "Ubicación") {
         locationMP(sender)
         continue
       }
-      if (text === "Contacto") {
+      if (res === "Contacto") {
         dataMessage(sender)
         continue
       }
-      if (text === "Recientes") {
+      if (res === "Recientes") {
         dataPosts(sender)
         continue
       }
-      if (text === "Prevención") {
+      if (res === "Prevención") {
         sendImages(sender)
         continue
       }
-      if (text === "Reportar") {
-        if (data_send.category == null) {
-          selectCategory(sender)
-
-        }else {
-          if (data_send.category != null) {
-            getTitlePost(sender, text.substring(0,200))
-            if (data_send.title != "") {
-              getStreetPost(sender, text.substring(0,200))
-              if (data_send.street != "") {
-                getTownPost(sender, text.substring(0,200))
-                if (data_send.town != "") {
-                  getExtraPost(sender, text.substring(0,200))
-                }
-                if (data_send.extra_location != "") {
-                  getDescriptionPost(sender, text.substring(0,200))
-                }
-              }
-            }
-          }
-        }
-
-
+      if (res === "Reportar") {
+        selectCategory(sender)
         continue
       }
-      if (text === "Experiencias") {
+      if (res === "Experiencias") {
         data_send.category = 1
       }
-      if (text === "Robo") {
+      if (res === "Robo") {
         data_send.category = 2
-      }if (text === "Alerta") {
+      }if (res === "Alerta") {
         data_send.category = 3
       }
 			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
@@ -410,8 +390,28 @@ function selectCategory(sender) {
 }
 
 function getTitlePost(sender, text) {
-	let messageData = { text:"Me puedes proporcionar el titulo del tu post" }
-  data_send.title = text
+	let messageData = {
+    "attachment": {
+			"type": "template",
+			"payload": {
+				"template_type": "generic",
+				"elements": [{
+					"title": "Ingresa el Titulo Con El Siguiente Formato",
+					"subtitle": "Titulo:TuTitulo",
+					"image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+					"buttons": [{
+						"type": "web_url",
+						"url": "https://www.messenger.com",
+						"title": "web url"
+					}, {
+						"type": "postback",
+						"title": "Postback",
+						"payload": "Titulo",
+					}],
+				}]
+			}
+		}
+  }
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
 		qs: {access_token:token},
@@ -430,8 +430,28 @@ function getTitlePost(sender, text) {
 }
 
 function getStreetPost(sender, text) {
-	let messageData = { text:"Me puedes proporcionar la calle en la que ocurrió" }
-  data_send.street = text
+	let messageData = {
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "generic",
+        "elements": [{
+          "title": "Ingresa la Calle Con El Siguiente Formato",
+          "subtitle": "Calle:TuCalle",
+          "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+          "buttons": [{
+            "type": "web_url",
+            "url": "https://www.messenger.com",
+            "title": "web url"
+          }, {
+            "type": "postback",
+            "title": "Postback",
+            "payload": "Calle",
+          }],
+        }]
+      }
+    }
+  }
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
 		qs: {access_token:token},
@@ -450,8 +470,28 @@ function getStreetPost(sender, text) {
 }
 
 function getTownPost(sender, text) {
-	let messageData = { text:"Me puedes proporcionar la colonia en la que ocurrió" }
-  data_send.town = text
+  let messageData = {
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "generic",
+        "elements": [{
+          "title": "Ingresa la Colonia Con El Siguiente Formato",
+          "subtitle": "Colonia:TuColonia",
+          "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+          "buttons": [{
+            "type": "web_url",
+            "url": "https://www.messenger.com",
+            "title": "web url"
+          }, {
+            "type": "postback",
+            "title": "Postback",
+            "payload": "Colonia",
+          }],
+        }]
+      }
+    }
+  }  data_send.town = text
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
 		qs: {access_token:token},
@@ -470,8 +510,28 @@ function getTownPost(sender, text) {
 }
 
 function getExtraPost(sender, text) {
-	let messageData = { text:"Me puedes proporcionar datos extra de la ubicación en la que ocurrió" }
-  data_send.extra_location = text
+  let messageData = {
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "generic",
+        "elements": [{
+          "title": "Ingresa los Datos Extra de La Ubicación Con El Siguiente Formato",
+          "subtitle": "Extra:DetallesExtra",
+          "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+          "buttons": [{
+            "type": "web_url",
+            "url": "https://www.messenger.com",
+            "title": "web url"
+          }, {
+            "type": "postback",
+            "title": "Postback",
+            "payload": "Extra",
+          }],
+        }]
+      }
+    }
+  }  data_send.extra_location = text
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
 		qs: {access_token:token},
@@ -490,8 +550,28 @@ function getExtraPost(sender, text) {
 }
 
 function getDescriptionPost(sender, text) {
-	let messageData = { text:"Me puedes proporcionar una descripción de lo que ocurrió" }
-  data_send.description = text
+  let messageData = {
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "generic",
+        "elements": [{
+          "title": "Ingresa la Descripción Con El Siguiente Formato",
+          "subtitle": "Descripción:TuDescripción",
+          "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+          "buttons": [{
+            "type": "web_url",
+            "url": "https://www.messenger.com",
+            "title": "web url"
+          }, {
+            "type": "postback",
+            "title": "Postback",
+            "payload": "Descripcion",
+          }],
+        }]
+      }
+    }
+  }  data_send.description = text
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
 		qs: {access_token:token},
