@@ -293,66 +293,6 @@ function sendImages(sender) {
 					"title": "Marca 10",
 					"subtitle": "ESTAN FUERA PERO HAY DIFICULTADES",
 					"image_url": "images/_estan_fuera_pero_hay_dificultades.png",
-				}, {
-					"title": "Marca 11",
-					"subtitle": "FACIL POR LA MAÑANA",
-					"image_url": "images/facil_por_la_mañana.png",
-				}, {
-					"title": "Marca 12",
-					"subtitle": "FACIL POR LA NOCHE",
-					"image_url": "images/facil_por_la_noche.png",
-				}, {
-					"title": "Marca 13",
-					"subtitle": "FACIL POR LA TARDE",
-					"image_url": "images/facil_por_la_tarde.png",
-				}, {
-					"title": "Marca 14",
-					"subtitle": "INUTIL INSISTIR",
-					"image_url": "images/inutil_insistir.png",
-				}, {
-					"title": "Marca 15",
-					"subtitle": "MUJER SOLA",
-					"image_url": "images/mumjer_sola.png",
-				}, {
-					"title": "Marca 16",
-					"subtitle": "MUY BUENA",
-					"image_url": "images/Muy_buena.png",
-				}, {
-					"title": "Marca 17",
-					"subtitle": "NADA DE INTERES",
-					"image_url": "images/nada_de_interes.png",
-				}, {
-					"title": "Marca 18",
-					"subtitle": "NIÑOS SOLOS POR LA MAÑANA",
-					"image_url": "images/niños_solos_por_la_mañana.png",
-				}, {
-					"title": "Marca 19",
-					"subtitle": "NIÑOS SOLOS POR LA TARDE",
-					"image_url": "images/niños_solos_por_la_tarde.png",
-				}, {
-					"title": "Marca 20",
-					"subtitle": "OJO HAY PERRO",
-					"image_url": "images/ojo_hay_perro.png",
-				}, {
-					"title": "Marca 21",
-					"subtitle": "ROBAR INVALIDO",
-					"image_url": "images/robar_invalido.png",
-				}, {
-					"title": "Marca 22",
-					"subtitle": "SE PUEDE ROBAR",
-					"image_url": "images/se_puede_robar.png",
-				}, {
-					"title": "Marca 23",
-					"subtitle": "SOLO VIVEN MUJERES",
-					"image_url": "images/solo_viven_mujeres.png",
-				}, {
-					"title": "Marca 24",
-					"subtitle": "USAR PALANCA",
-					"image_url": "images/usar_palanca.png",
-				}, {
-					"title": "Marca 25",
-					"subtitle": "VUELVE PRONTO",
-					"image_url": "images/vuelve_pronto.png",
 				}]
 			}
 		}
