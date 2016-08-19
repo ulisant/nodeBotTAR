@@ -128,20 +128,19 @@ function sendGenericMessage(sender) {
 
 function locationMP(sender){
   let messageData = {
-    "message": {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": {
-                    "element": {
-                        "title": "Your current location",
-                        "image_url": "https:\/\/maps.googleapis.com\/maps\/api\/staticmap?size=764x400&center="+"20.1029126"+","+"-98.3558106"+"&zoom=25&markers="+"20.1029126"+","+"-98.3558106",
-                        "item_url": "http:\/\/maps.apple.com\/maps?q="+"20.1029126"+","+"-98.3558106"+"&z=16"
-                    }
+    "attachment": {
+      "type": "template",
+        "payload": {
+          "template_type": "generic",
+            "elements": {
+              "element": {
+                "title": "Your current location",
+                "image_url": "https:\/\/maps.googleapis.com\/maps\/api\/staticmap?size=764x400&center="+"20.1029126"+","+"-98.3558106"+"&zoom=25&markers="+"20.1029126"+","+"-98.3558106",
+                "item_url": "http:\/\/maps.apple.com\/maps?q="+"20.1029126"+","+"-98.3558106"+"&z=16"
                 }
-            }
-        }
+              }
+          }
+      }
     }
   }
   request({
