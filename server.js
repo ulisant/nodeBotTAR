@@ -129,7 +129,7 @@ function sendGenericMessage(sender) {
 function locationMP(sender){
   let messageData = {
         "attachment": {
-            "type": "template",
+            "type": "location",
             "payload": {
                 "template_type": "generic",
                 "elements": {
