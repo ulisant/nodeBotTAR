@@ -89,24 +89,21 @@ app.post('/tarant/', function (req, res) {
           selectCategory(sender)
           continue
         }
-        if (text === "Experiencias") {
-          data_send.category = 1
-          continue
-        }
-        if (text === "Robo") {
-          data_send.category = 2
-          continue
-        }if (text === "Alerta") {
-          data_send.category = 3
-          continue
-        }
       }
 
 			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
 		}
 		if (event.postback) {
 			let text = JSON.stringify(event.postback)
-      if (text == "Categoria") {
+      if (text === "Experiencias") {
+        data_send.category = 1
+        getTitlePost(sender)
+      }
+      if (text === "Robo") {
+        data_send.category = 2
+        getTitlePost(sender)
+      }if (text === "Alerta") {
+        data_send.category = 3
         getTitlePost(sender)
       }
       if (text == "Titulo") {
@@ -375,24 +372,30 @@ function sendImages(sender) {
 function selectCategory(sender) {
 
   let messageData = {
-    "text":"Selecciona una categoria:",
-    "quick_replies":[
-      {
-        "content_type":"text",
-        "title":"Experiencias",
-        "payload":"Categoria"
-      },
-      {
-        "content_type":"text",
-        "title":"Robo",
-        "payload":"Categoria"
-      },
-      {
-        "content_type":"text",
-        "title":"Alerta",
-        "payload":"Categoria"
+    "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"button",
+        "text":"Selecciona una categoria",
+        "buttons":[
+          {
+            "type":"postback",
+            "title":"Experiencias",
+            "payload":"Experiencias"
+          },
+          {
+            "type":"postback",
+            "title":"Robos",
+            "payload":"Robos"
+          }
+          {
+            "type":"postback",
+            "title":"Alerta",
+            "payload":"Alerta"
+          }
+        ]
       }
-    ]
+    }
 	}
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
