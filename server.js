@@ -41,6 +41,10 @@ app.post('/tarant/', function (req, res) {
         locationMP(sender)
         continue
       }
+      if (text === "Contacto") {
+        dataMessage(sender)
+        continue
+      }
 			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
 		}
 		if (event.postback) {
@@ -157,6 +161,38 @@ function locationMP(sender){
       console.log('Error: ', response.body.error)
     }
   })
+}
+
+function dataMessage(sender) {
+	let messageData = {
+		"attachment": {
+			"type": "template",
+			"payload": {
+				"template_type": "generic",
+				"elements": [{
+					"title": "Teléfonos de Contacto",
+					"subtitle": "* (775) 75 3 01 57 EXT. 4133 y 4633 \n * (775) 75 5 26 86  \n 01 (800) 69 0 74 48",
+					"image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+
+				}
+			}
+		}
+	}
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/messages',
+		qs: {access_token:token},
+		method: 'POST',
+		json: {
+			recipient: {id:sender},
+			message: messageData,
+		}
+	}, function(error, response, body) {
+		if (error) {
+			console.log('Error sending messages: ', error)
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error)
+		}
+	})
 }
 
 // Spin up the server
