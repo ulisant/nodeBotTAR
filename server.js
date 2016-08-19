@@ -70,9 +70,14 @@ app.post('/tarant/', function (req, res) {
       if (text === "Reportar") {
         if (data_send.category == null) {
           selectCategory(sender)
-        }else if (data_send.title == "") {
           getTitlePost(sender, text.substring(0,200))
+          getStreetPost(sender, text.substring(0,200))
+          getTownPost(sender, text.substring(0,200))
+          getExtraPost(sender, text.substring(0,200))
+          getDescriptionPost(sender, text.substring(0,200))
         }
+
+
         continue
       }
       if (text === "Experiencias") {
@@ -395,6 +400,86 @@ function selectCategory(sender) {
 function getTitlePost(sender, text) {
 	let messageData = { text:"Me puedes proporcionar el titulo del tu post" }
   data_send.title = text
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/messages',
+		qs: {access_token:token},
+		method: 'POST',
+		json: {
+			recipient: {id:sender},
+			message: messageData,
+		}
+	}, function(error, response, body) {
+		if (error) {
+			console.log('Error sending messages: ', error)
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error)
+		}
+	})
+}
+
+function getStreetPost(sender, text) {
+	let messageData = { text:"Me puedes proporcionar la calle en la que ocurrió" }
+  data_send.street = text
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/messages',
+		qs: {access_token:token},
+		method: 'POST',
+		json: {
+			recipient: {id:sender},
+			message: messageData,
+		}
+	}, function(error, response, body) {
+		if (error) {
+			console.log('Error sending messages: ', error)
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error)
+		}
+	})
+}
+
+function getTownPost(sender, text) {
+	let messageData = { text:"Me puedes proporcionar la colonia en la que ocurrió" }
+  data_send.town = text
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/messages',
+		qs: {access_token:token},
+		method: 'POST',
+		json: {
+			recipient: {id:sender},
+			message: messageData,
+		}
+	}, function(error, response, body) {
+		if (error) {
+			console.log('Error sending messages: ', error)
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error)
+		}
+	})
+}
+
+function getExtraPost(sender, text) {
+	let messageData = { text:"Me puedes proporcionar datos extra de la ubicación en la que ocurrió" }
+  data_send.extra_location = text
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/messages',
+		qs: {access_token:token},
+		method: 'POST',
+		json: {
+			recipient: {id:sender},
+			message: messageData,
+		}
+	}, function(error, response, body) {
+		if (error) {
+			console.log('Error sending messages: ', error)
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error)
+		}
+	})
+}
+
+function getDescriptionPost(sender, text) {
+	let messageData = { text:"Me puedes proporcionar una descripción de lo que ocurrió" }
+  data_send.description = text
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
 		qs: {access_token:token},
