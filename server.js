@@ -99,15 +99,13 @@ app.post('/tarant/', function (req, res) {
       if (text === "Experiencias") {
         data_send.category = 1
         getTitlePost(sender)
-      }
-      if (text === "Robos") {
+      }else if (text === "Robos") {
         data_send.category = 2
         getTitlePost(sender)
-      }if (text === "Alerta") {
+      }else if (text === "Alerta") {
         data_send.category = 3
         getTitlePost(sender)
-      }
-      if (text == "Titulo") {
+      }else if (text == "Titulo") {
         getStreetPost(sender)
       }else if (text == "Calle"){
         getTownPost(sender)
