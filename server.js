@@ -13,6 +13,8 @@ app.use(bodyParser.urlencoded({extended: false}))
 // Process application/json
 app.use(bodyParser.json())
 
+var data_post = []
+
 // Index route
 app.get('/', function (req, res) {
     res.send('Hello world, I am a chat bot')
@@ -43,6 +45,10 @@ app.post('/tarant/', function (req, res) {
       }
       if (text === "Contacto") {
         dataMessage(sender)
+        continue
+      }
+      if (text === "Recientes") {
+        dataPosts(sender)
         continue
       }
 			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
@@ -172,11 +178,51 @@ function dataMessage(sender) {
 				"elements": [{
 					"title": "Teléfonos de Contacto",
 					"subtitle": "- 775 75 3 01 57 EXT. 4133 y 4633" +
-          "- 775 75 5 26 86 " +
-          "- 01 (800) 69 0 74 48",
+          " - 775 75 5 26 86 " +
+          " - 01 800 69 0 74 48",
 					"image_url": "http://premiumwebfreebies.com/wp-content/uploads/2013/11/flat-email-icon-display.jpg",
 
 				}]
+			}
+		}
+	}
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/messages',
+		qs: {access_token:token},
+		method: 'POST',
+		json: {
+			recipient: {id:sender},
+			message: messageData,
+		}
+	}, function(error, response, body) {
+		if (error) {
+			console.log('Error sending messages: ', error)
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error)
+		}
+	})
+}
+
+function dataPosts(sender) {
+  request("http://40.118.210.129:8080/restrobos/posts/", function(error, response, body) {
+    var data = JSON.parse(body)
+    var results = data.results
+    for (var i = 0; i < 5; i++) {
+      var elements = {
+        "title": results[i].title,
+        "subtitle": "Calle: " + results[i].street + "Colonia: " + results[i].town,
+        "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+      }
+      data_post.push(elements)
+    }
+    console.log(data_post);
+  });
+	let messageData = {
+		"attachment": {
+			"type": "template",
+			"payload": {
+				"template_type": "generic",
+				"elements": data_post
 			}
 		}
 	}
